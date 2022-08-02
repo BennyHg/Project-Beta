@@ -47,7 +47,7 @@ def api_list_services(request):
             encoder=ServiceEncoder,
             safe=False,
         )
-    else:
+    else: # POST
         content = json.loads(request.body)
         try:
             technician = Technician.objects.get(employee_number=content["technician"])
@@ -67,9 +67,10 @@ def api_list_services(request):
         )
 
 @require_http_methods(["DELETE", "GET", "PUT"])
-def api_detail_service(request, pk):
+def api_detail_service(request, vin):
     if request.method == "GET":
-        service = Service.objects.get(id=pk)
+        service = Service.objects.get(vin=vin)
+        print(service)
         return JsonResponse(
             service,
             encoder=ServiceEncoder,
@@ -77,23 +78,23 @@ def api_detail_service(request, pk):
         )
         
     elif request.method == "DELETE":
-        count, _ = Service.objects.filter(id=pk).delete()
+        count, _ = Service.objects.filter(vin=vin).delete()
         return JsonResponse({"deleted": count > 0})
 
-    else:
+    else: # PUT
         content = json.loads(request.body)
         try:
-            if "vin" in content:
-                vin = AutomobileVO.objects.get(id=content["vin"])
-                content["vin"] = vin
-        except AutomobileVO.DoesNotExist:
+            if "technician" in content:
+                technician = Technician.objects.get(employee_number=content["technician"])
+                content["technician"] = technician
+        except Technician.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid VIN"},
+                {"message": "Technician not exist "},
                 status=400,
             )
         
-        Service.objects.filter(id=pk).update(**content)
-        shoe = Service.objects.get(id=pk)
+        Service.objects.filter(vin=vin).update(**content)
+        service = Service.objects.get(vin=vin)
         return JsonResponse(
             service,
             encoder=ServiceEncoder,

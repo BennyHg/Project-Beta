@@ -33,7 +33,7 @@ class Service(models.Model):
     customer_name = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)  
     time = models.DateTimeField(auto_now_add=True) 
-    reason = models.CharField(max_length=200) 
+    reason = models.CharField(max_length=100) 
     technician = models.ForeignKey(
         Technician,
         related_name="services",
