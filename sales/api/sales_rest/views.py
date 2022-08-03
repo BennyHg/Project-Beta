@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
-
+from decimal import Decimal
 
 
 from common.json import ModelEncoder
@@ -33,6 +33,16 @@ class CustomerListEncoder(ModelEncoder):
         "id",
     ]
 
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return str(obj)
+        return json.JSONEncoder.default(self, obj)
+
+class SalesRecordPriceEncoder(DecimalEncoder):
+    model = SalesRecord
+    properties = ["price"]
+
 class SalesRecordListEncoder(ModelEncoder):
     model = SalesRecord
     properties = [
@@ -46,14 +56,16 @@ class SalesRecordListEncoder(ModelEncoder):
         "sales_person": SalesPersonListEncoder(),
         "customer": CustomerListEncoder(),
         "automobile": AutomobileVOEncoder(),
+        "price": SalesRecordPriceEncoder(),
     }
 
-    def get_extra_data(self, o):
-        return {
-            "vin": o.automobile.vin,
-            "customer": o.customer.name,
-            "sales_person": o.sales_person.name,
-        }
+    # def get_extra_data(self, o):
+    #     return {
+    #         "vin": o.automobile.vin,
+    #         "customer": o.customer.name,
+    #         "sales_person": o.sales_person.name,
+    #         "employee_number": o.sales_person.employee_number,
+    #     }
 
 
 # Customer
