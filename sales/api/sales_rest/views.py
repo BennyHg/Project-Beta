@@ -33,15 +33,15 @@ class CustomerListEncoder(ModelEncoder):
         "id",
     ]
 
-class DecimalEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, Decimal):
-            return str(obj)
-        return json.JSONEncoder.default(self, obj)
+# class DecimalEncoder(json.JSONEncoder):
+#     def default(self, obj):
+#         if isinstance(obj, Decimal):
+#             return str(obj)
+#         return json.JSONEncoder.default(self, obj)
 
-class SalesRecordPriceEncoder(DecimalEncoder):
-    model = SalesRecord
-    properties = ["price"]
+# class SalesRecordPriceEncoder(DecimalEncoder):
+#     model = SalesRecord
+#     properties = ["price"]
 
 class SalesRecordListEncoder(ModelEncoder):
     model = SalesRecord
@@ -56,7 +56,7 @@ class SalesRecordListEncoder(ModelEncoder):
         "sales_person": SalesPersonListEncoder(),
         "customer": CustomerListEncoder(),
         "automobile": AutomobileVOEncoder(),
-        "price": SalesRecordPriceEncoder(),
+        # "price": SalesRecordPriceEncoder(),
     }
 
     # def get_extra_data(self, o):
@@ -211,7 +211,7 @@ def api_sales_records(request):
             encoder=SalesRecordListEncoder
         )
     else: # post 
-        try:
+        # try:
             content = json.loads(request.body)
 
             automobile_vin = content["automobile"]
@@ -232,11 +232,11 @@ def api_sales_records(request):
                 encoder=SalesRecordListEncoder,
                 safe=False
             )
-        except:
-            return JsonResponse(
-                {"message": "Could not create Sales record"},
-                status=400,
-            )
+        # except:
+        #     return JsonResponse(
+        #         {"message": "Could not create Sales record"},
+        #         status=400,
+        #     )
 
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_sales_record(request, pk):

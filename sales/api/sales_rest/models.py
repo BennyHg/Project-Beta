@@ -39,7 +39,7 @@ class SalesRecord(models.Model):
         on_delete=models.PROTECT
     )
 
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.CharField(max_length=10)
 
     def get_api_url(self):
         return reverse("api_sales_record", kwargs={"pk": self.id})
