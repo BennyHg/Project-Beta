@@ -5,6 +5,7 @@ import SalesRecordList from './SalesRecordList';
 import SalesRecordForm from './SalesRecordForm';
 import SalesPersonHistory from './SalesPersonHistory';
 import SalesPersonForm from './SalesPersonForm';
+import CustomerForm from './CustomerForm';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/sales_records/new" element={<SalesRecordForm />} />
           <Route path="/sales_records/history" element={<SalesPersonHistory />} />
           <Route path="/sales_persons/new" element={<SalesPersonForm />} />
+          <Route path="/customers/new" element={<CustomerForm />} />
         </Routes>
       </div>
     </BrowserRouter>
