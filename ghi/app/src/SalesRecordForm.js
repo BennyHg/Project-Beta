@@ -45,8 +45,6 @@ class SalesRecordForm extends React.Component {
         delete data.autos
         delete data.salespersons
         delete data.customers
-        data.price = data.price + ''
-        console.log(typeof data.price)
 
 
         const salesrecordUrl = 'http://localhost:8090/api/sales_records/'

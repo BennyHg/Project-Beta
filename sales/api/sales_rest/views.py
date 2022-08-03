@@ -211,7 +211,7 @@ def api_sales_records(request):
             encoder=SalesRecordListEncoder
         )
     else: # post 
-        # try:
+        try:
             content = json.loads(request.body)
 
             automobile_vin = content["automobile"]
@@ -232,11 +232,11 @@ def api_sales_records(request):
                 encoder=SalesRecordListEncoder,
                 safe=False
             )
-        # except:
-        #     return JsonResponse(
-        #         {"message": "Could not create Sales record"},
-        #         status=400,
-        #     )
+        except:
+            return JsonResponse(
+                {"message": "Could not create Sales record"},
+                status=400,
+            )
 
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_sales_record(request, pk):
