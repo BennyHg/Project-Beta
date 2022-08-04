@@ -18,7 +18,7 @@ class AutomobileVO(models.Model):
     color = models.CharField(null= True,max_length=100)
     year = models.IntegerField(null=True)
     model = models.CharField(null= True,max_length=100)
-    # import_href= models.CharField(unique= True, max_length=200)
+    # import_href= models.CharField(unique= True, max_length=50)
     # vip = models.BooleanField (default=True)
 
     def get_api_url(self):

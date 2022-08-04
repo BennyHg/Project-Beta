@@ -26,6 +26,7 @@ def get_inventory():
                 # "vip": auto["vip"],
                 },
         )
+            
 def poll():
     while True:
         print('Service poller polling for data')

@@ -50,7 +50,7 @@ MIDDLEWARE = [
 ]
 
 ALLOWED_HOSTS = [
-    "localhost", 
+    "localhost",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -58,7 +58,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:3000","http://localhost:8080",
 ]
 CORS_ALLOW_CREDENTIALS = True
 

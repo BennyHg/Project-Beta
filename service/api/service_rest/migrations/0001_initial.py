@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
                 ('customer_name', models.CharField(max_length=100)),
                 ('date', models.DateTimeField(auto_now_add=True)),
                 ('time', models.DateTimeField(auto_now_add=True)),
-                ('reason', models.CharField(max_length=200)),
+                ('reason', models.CharField(max_length=50)),
                 ('technician', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='services', to='service_rest.technician')),
             ],
         ),

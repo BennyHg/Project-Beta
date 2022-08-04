@@ -38,6 +38,14 @@ class ServiceEncoder(ModelEncoder):
         "technician": TechnicianEncoder(),
     }
 
+    def get_extra_data(self, o):
+        count = AutomobileVO.objects.filter(vin=o.vin).count()
+        return {"vip": count > 0}
+
+
+        
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_services(request):
     if request.method == "GET":
@@ -126,5 +134,15 @@ def api_list_technician(request):
         return JsonResponse(
             technician,
             encoder=TechnicianEncoder,
+            safe=False,
+        )
+
+@require_http_methods(["GET"])
+def api_service_history(request,vin):
+    if request.method == "GET":
+        service = Service.objects.filter(vin=vin)
+        return JsonResponse(
+            {"service": service}, 
+            encoder=ServiceEncoder,
             safe=False,
         )
