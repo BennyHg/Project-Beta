@@ -61,7 +61,7 @@ class SalesRecordForm extends React.Component {
             console.log(newSales)
 
             const cleared = {
-                auto: '',
+                automobile: '',
                 sales_person: '',
                 customer: '',
                 price: ''
