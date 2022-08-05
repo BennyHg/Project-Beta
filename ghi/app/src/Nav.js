@@ -12,7 +12,7 @@ function Nav() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
           <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link"aria-current="page" to="/services/new">Services</NavLink>
@@ -27,37 +27,37 @@ function Nav() {
               <NavLink className="nav-link" aria-current="page" to="/technician/new">Technician</NavLink>
             </li>
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/manufacturers">Manufacturers</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/manufacturers">Manufacturers</NavLink>
             </li> 
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/manufacturers/new">Add a manufacturer</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/manufacturers/new">Add a manufacturer</NavLink>
             </li> 
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/vehicle_models">Vehicle Models</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/vehicle_models">Vehicle Models</NavLink>
             </li> 
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/vehicle_models/new">Create a Vehicle Model</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/vehicle_models/new">Create a Vehicle Model</NavLink>
             </li> 
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/automobiles">Automobiles</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/automobiles">Automobiles</NavLink>
             </li>
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/automobiles/new">Add a automobile</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/automobiles/new">Add a automobile</NavLink>
             </li>
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/sales_persons/new">Add new sales person</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/sales_persons/new">Add new sales person</NavLink>
             </li>   
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/customers/new">Add new customer</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/customers/new">Add new customer</NavLink>
             </li>   
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/sales_records/new">Create a Sales record</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/sales_records/new">Create a Sales record</NavLink>
             </li> 
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/sales_records">Sales records</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/sales_records">Sales records</NavLink>
             </li>   
             <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/sales_records/history">Salesperson history</NavLink>
+            <NavLink className="nav-link" aria-current="page" to="/sales_records/history">Salesperson history</NavLink>
             </li>
           </ul>
         </div>
