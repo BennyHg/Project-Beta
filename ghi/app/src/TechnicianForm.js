@@ -16,7 +16,6 @@ class TechnicianForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = { ...this.state };
-    
         const technicianUrl = 'http://localhost:8080/api/technician/';
         const fetchConfig = {
             method: "post",
@@ -29,7 +28,6 @@ class TechnicianForm extends React.Component {
         if (response.ok) {
             const newTechnician = await response.json();
             console.log(newTechnician);
-
             const cleared = {
                 name: '',
                 employee_number: '',
@@ -51,7 +49,6 @@ class TechnicianForm extends React.Component {
     render() {
         return (
             <div className="row">
-
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
                         <h1>Create a new technician</h1>

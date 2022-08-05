@@ -36,7 +36,6 @@ class ServiceForm extends React.Component {
         const data = { ...this.state };
         console.log(data)
         delete data.technicians;
-        
         const serviceUrl = 'http://localhost:8080/api/services/';
         const fetchConfig = {
             method: 'post',
@@ -50,7 +49,6 @@ class ServiceForm extends React.Component {
         if (response.ok) {
             const newservice = await response.json();
             console.log(newservice)
-           
             const cleared = {
                 vin: '',
                 customer_name: '',
@@ -58,7 +56,6 @@ class ServiceForm extends React.Component {
                 time: '',
                 reason: '',
                 technician: '',
-
             };
             this.setState(cleared);
         } else {

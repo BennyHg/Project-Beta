@@ -19,10 +19,9 @@ function App(props) {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="services/new" element={<ServiceForm />} />
-          <Route path="services_list" element={<ServicesList services={props.services} />} />
+          <Route path="services_list" element={<ServicesList/>} />
           <Route path="services_history" element={<ServiceHistory />} />
           <Route path="technician/new" element={<TechnicianForm />} />
-       
         </Routes>
       </div>
     </BrowserRouter>

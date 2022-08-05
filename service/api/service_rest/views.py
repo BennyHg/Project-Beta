@@ -46,7 +46,7 @@ class ServiceEncoder(ModelEncoder):
     }
 
     def get_extra_data(self, o):
-        print("?????????????????????",o.status.name)
+        # print("?????????????????????",o.status.name)
         count = AutomobileVO.objects.filter(vin=o.vin).count()
         return {
             "vip": count > 0,
@@ -181,3 +181,39 @@ def api_finish_appointment(request,vin):
         encoder=ServiceEncoder,
         safe=False,
     )
+
+@require_http_methods(["GET","PUT"])
+def api_change_status(request,vin):
+    if request.method == "GET":
+        try:
+            appointment = Service.objects.get(vin=vin)
+            return JsonResponse(
+                appointment,
+                encoder=ServiceEncoder,
+                safe=False,
+            )
+        except Service.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+
+    else: # PUT
+        try:
+            content = json.loads(request.body)
+            print(content)
+            status = Service.objects.get(vin=vin)
+            props = ["Scheduled","Cancel","Finish", ]
+            for prop in props:
+                if prop == content["status"]:
+                    change = Status.objects.get(name=prop)
+                    setattr(status,"status",change)
+            status.save()
+            return JsonResponse(
+                status,
+                encoder=ServiceEncoder,
+                safe=False,
+            )
+        except Service.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response        

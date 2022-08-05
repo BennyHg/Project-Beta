@@ -17,7 +17,6 @@ class Status(models.Model):
         verbose_name_plural = "statuses"
 
 
-
 class Technician(models.Model):
     name =  models.CharField( unique=True,max_length=100)
     employee_number = models.IntegerField(unique=True, null=True)
@@ -68,22 +67,22 @@ class Service(models.Model):
     def __str__(self):
         return self.vin
 
-    def cancel(self):
-        status= Status.objects.get(name="Cancel")
-        self.status= status
-        self.save()
+    # def cancel(self):
+    #     status= Status.objects.get(name="Cancel")
+    #     self.status= status
+    #     self.save()
 
-    def finish(self):
-        status= Status.objects.get(name="Finish")
-        self.status= status
-        self.save()
+    # def finish(self):
+    #     status= Status.objects.get(name="Finish")
+    #     self.status= status
+    #     self.save()
 
-    @classmethod
-    def create(cls, **kwargs):
-        kwargs["status"] = Status.objects.get(name="Scheduled")
-        appointment = cls(**kwargs)
-        appointment.save()
-        return appointment    
+    # @classmethod
+    # def create(cls, **kwargs):
+    #     kwargs["status"] = Status.objects.get(name="Scheduled")
+    #     appointment = cls(**kwargs)
+    #     appointment.save()
+    #     return appointment    
 
     class Meta:
         verbose_name_plural = "Services"     

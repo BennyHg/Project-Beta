@@ -22,7 +22,6 @@ class ServiceHistory extends React.Component {
             const vins = await response.json();
             console.log(vins)
             this.setState({services:[vins]})
-            
             const cleared = {
                 vin: '',
             };
