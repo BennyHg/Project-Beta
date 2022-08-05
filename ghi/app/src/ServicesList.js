@@ -3,6 +3,20 @@ import React from 'react';
 
 function ServicesList(props) {
     // console.log(props)
+    function onCancel(vin){
+    console.log("worked")
+    const url = `http://localhost:8080/api/services/${vin}/`
+        const fetchConfig = {
+            method: "PUT",
+        }
+    }
+    function onFinish(vin){
+    console.log("worked")
+    const url = `http://localhost:8080/api/services/${vin}/`
+        const fetchConfig = {
+            method: "PUT",
+        }
+    }
 
     return (
         <>
@@ -22,7 +36,7 @@ function ServicesList(props) {
             </tr>
             </thead>
             <tbody>
-                    {props.services.map(service => {
+                    {props.services.filter(service => service.status.id === 1).map(service => {
                         return (
                             <tr key={service.vin}>
                                 <td>{service.vin}</td>
@@ -32,8 +46,10 @@ function ServicesList(props) {
                                 <td>{service.technician.name}</td>
                                 <td>{service.reason}</td>
                                 <td>{(service.vip)? "False" :"True"}</td>
-                                <td>{service.status}</td>
-                                
+                                <td>
+                                    <button className='cancel' onClick={() => onCancel()}>Cancel </button>
+                                    <button className='finish' onClick={() => onFinish()}>Finished</button>
+                                </td>
                             </tr>
                         );
                     })}

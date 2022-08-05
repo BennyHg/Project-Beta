@@ -3,9 +3,14 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
 from common.json import ModelEncoder
-from service_rest.models import AutomobileVO, Service, Technician
+from service_rest.models import AutomobileVO, Service, Technician, Status
 
 # Create your views here.
+
+class StatusEncoder(ModelEncoder):
+    model = Status
+    properties = ["name","id"]
+
 
 class TechnicianEncoder(ModelEncoder):
     model = Technician
@@ -33,23 +38,31 @@ class ServiceEncoder(ModelEncoder):
         "time",
         "reason",
         "technician",
+        "status",
     ]
     encoders = {
+        "status": StatusEncoder(),
         "technician": TechnicianEncoder(),
     }
 
     def get_extra_data(self, o):
+        print("?????????????????????",o.status.name)
         count = AutomobileVO.objects.filter(vin=o.vin).count()
-        return {"vip": count > 0}
-
-
-        
-
-
+        return {
+            "vip": count > 0,
+            "status": {
+                "name": o.status.name,
+                "id": o.status.id
+            }
+        }
+  
 @require_http_methods(["GET", "POST"])
 def api_list_services(request):
     if request.method == "GET":
+
         services = Service.objects.all()
+        # for service in services :
+        #     print("!!!!!!!!!!!!!!!!!!!!!!", service.status)
         return JsonResponse(
             {"services": services}, 
             encoder=ServiceEncoder,
@@ -60,8 +73,9 @@ def api_list_services(request):
         try:
             technician = Technician.objects.get(employee_number=content["technician"])
             content["technician"] = technician
-        
-            
+            status=Status.objects.get(name="Scheduled")
+            content["status"]=status
+
         except Technician.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid VIN"},
@@ -146,3 +160,24 @@ def api_service_history(request,vin):
             encoder=ServiceEncoder,
             safe=False,
         )
+
+@require_http_methods(["PUT"])
+def api_cancel_appointment(request,vin):
+    appointment = Service.objects.get(vin=vin)
+    appointment.cancel()
+    return JsonResponse(
+        appointment,
+        encoder=ServiceEncoder,
+        safe=False,
+    )
+
+
+@require_http_methods(["PUT"])
+def api_finish_appointment(request,vin):
+    appointment = Service.objects.get(vin=vin)
+    appointment.finish()
+    return JsonResponse(
+        appointment,
+        encoder=ServiceEncoder,
+        safe=False,
+    )
